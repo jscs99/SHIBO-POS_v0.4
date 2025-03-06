@@ -1,0 +1,28 @@
+{
+  "name": "shibo-pos",
+  "version": "1.0.0",
+  "description": "El Salvador pos system: Shibo-POS",
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "csv-parser": "^3.2.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.1",
+    "fs": "^0.0.1-security",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.11.5",
+    "sequelize": "^6.37.5"
+  },
+  "scripts": {
+    "start": "NODE_ENV=development node server.js",
+    "start:prod": "NODE_ENV=production node server.js",
+    "build": "cd client && npm run build",
+    "start:full:dev": "npm run build && NODE_ENV=development pm2 start server.js --name 'app-dev'",
+    "start:full:prod": "npm run build && NODE_ENV=production pm2 start server.js --name 'app-prod'",
+    "pm2:save": "pm2 save",
+    "pm2:startup": "pm2 startup",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "JM Calderon, Insert, S.A. de C.V. Siscom Guatemala",
+  "license": "ISC"
+}

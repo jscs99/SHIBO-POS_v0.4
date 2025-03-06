@@ -1,0 +1,75 @@
+Buscar_ProcesosLinux
+
+Backend (node server.js) → ps aux | grep -i server.js, luego kill PID
+
+Frontend (npm start) → ps aux | grep -i webpack o ps aux | grep -i react, luego kill PID
+
+Matar todos los procesos de Node.js → pkill -f node
+
+
+which node
+
+sudo systemctl daemon-reload
+
+journalctl -u shibo.service --no-pager --lines=50
+
+
+Archivo del servicio Front-end shibo-client.service
+
+sudo nano /etc/systemd/system/shibo-frontend.service
+
+[Unit]
+Description=Iniciar frontend de SHIBO-POS
+After=network.target shibo.service
+
+[Service]
+Type=simple
+User=insertpc
+WorkingDirectory=/srv/http/SHIBO-POS/client
+ExecStart=/home/insertpc/.nvm/versions/node/v20.18.0/bin/npm start
+Restart=always
+RestartSec=5
+StandardOutput=append:/var/log/shibo-frontend.log
+StandardError=append:/var/log/shibo-frontend-error.log
+Environment=PATH=/home/insertpc/.nvm/versions/node/v20.18.0/bin:/usr/local/bin:/usr/bin:/bin
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
+
+
+Archivo del servicio Back-end shibo.service
+
+sudo nano /etc/systemd/system/shibo.service
+
+[Unit]
+Description=Iniciar servidores SHIBO-POS
+After=network.target
+
+[Service]
+Type=simple
+User=insertpc
+WorkingDirectory=/srv/http/SHIBO-POS
+ExecStart=/home/insertpc/.nvm/versions/node/v20.18.0/bin/node /srv/http/SHIBO-POS/server.js
+Restart=always
+RestartSec=5
+StandardOutput=append:/var/log/shibo.log
+StandardError=append:/var/log/shibo-error.log
+
+[Install]
+WantedBy=multi-user.target
+
+
+systemctl daemon-reload enable and restart / stop
+
+Acceso directo: shibo.sh (autorizar sudo chmod +x shibo.sh)
+
+#!/bin/bash
+
+export DISPLAY=:0
+
+echo "Abriendo el navegador en http://localhost:5000..."
+nohup firefox http://localhost:3000 >/dev/null 2>&1 &
+
+
+

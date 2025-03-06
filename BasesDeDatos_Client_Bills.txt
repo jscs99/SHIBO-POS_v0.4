@@ -1,0 +1,93 @@
+customers
+customerCode
+customerName
+customerNit --NIT
+customerNrc --NRC
+customerDoc -- DUI OR PASAPORTE
+customerDocNumber --1234567
+customerAeconomic
+customerAddress
+customerEmail
+customerPhone
+timestamp -- fecha y hora
+
+
+
+bills
+customerCode --Si
+documentType --No va aqui
+userAlias    --Si
+cartItems --Object
+subtotal
+taxiva
+totalAmount
+ ----
+state --completed, pending cancelled --anulación --         	  nota 	de crédito --consumidor final
+discount  
+paymentMode
+
+GenCode --código de generación
+CtrlNumber --Numero de control
+receiptStamp --sello de recepción
+invoiceModel --Modelo de facturación
+transmission -- tipo de transmisión
+timestamp -- fecha y hora
+
+Usar la condición del tipo de documento: example
+
+function Bills() {
+  const [itemsData, setItemsData] = useState([]);
+  const [documentType, setDocumentType] = useState("recibo"); // Puede ser "recibo" o "factura"
+
+  const getAllItems = () => {
+    axios
+      .get("/api/items/get-all-items")
+      .then((response) => {
+        console.log("Items fetched: ", response.data);
+        setItemsData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getAllItems();
+  }, []);
+
+  const cartColumns = [
+    {
+      title: "P. Unitario",
+      dataIndex: documentType === "factura" ? "priceWIVA" : "price",
+      key: "unitPrice",
+    },
+    {
+      title: "Total",
+      dataIndex: "id",
+      render: (id, record) => (
+        <div>
+          <b>{record.quantity * (documentType === "factura" ? record.priceWIVA : record.price)}</b>
+        </div>
+      ),
+      key: "total",
+    },
+  ];
+
+  return (
+    <div>
+      <Select
+        value={documentType}
+        onChange={(value) => setDocumentType(value)}
+      >
+        <Select.Option value="recibo">Recibo</Select.Option>
+        <Select.Option value="factura">Factura</Select.Option>
+      </Select>
+      <Table dataSource={itemsData} columns={cartColumns} />
+    </div>
+  );
+}
+
+Para mostrar un aviso en el frontend cuando el NIT ya esté en uso, puedes manejar el error que viene del backend y mostrar un mensaje adecuado en tu formulario. Puedes usar la función setFields de Ant Design para establecer un mensaje de error en un campo específico.
+
+
+

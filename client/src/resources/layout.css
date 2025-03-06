@@ -1,0 +1,69 @@
+.ant-layout-has-sider{
+    padding: 15px;
+}
+
+.ant-layout-sider{
+    border-radius: 10px;
+}
+
+.ant-layout-sider-children{
+    padding-top: 15px;
+    padding-right: 20px;
+    height: 95vh !important;
+}
+
+.ant-layout-header{
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 7px;
+    justify-content: space-between;
+    padding-right: 20px !important;
+}
+.anticon svg{
+    height: 25px;
+    width: 25px;
+    font-size: 25px;
+}
+
+.demo-logo-vertical h3{
+    color: #0887ad;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 100px;
+    
+}
+
+.ant-menu-title-content a {
+    text-decoration: none; /* Elimina el subrayado */
+    font-size: 1.01rem; /* Cambia el tamaño de la letra (ajusta según necesites) */
+  }
+
+.ant-menu-item-selected{
+    background-color: #066583 !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.cart-count {
+    cursor: pointer;
+}
+
+.spinner{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.spinner-border{
+    height: 100px;
+    width: 100px;
+}
+
+.ant-layout-content{
+    height: 80vh;
+    overflow-y: scroll;
+}
